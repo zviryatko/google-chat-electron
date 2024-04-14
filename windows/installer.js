@@ -1,11 +1,12 @@
 'use strict';
 
-const path = require('path');
-const fs = require('fs');
-const childProcess = require('child_process')
-const utils = require('./utility');
+import path from 'path';
+import fs from 'fs';
+import { exec, ChildProcess } from 'child_process';
+import * as utils from './utility';
 
-const manifest = require(path.join(__dirname, '../package.json'));
+import manifest from '../package.json';
+
 const inPath = path.join(__dirname, '../dist/');
 const outDir = path.join(__dirname, '../dist/installers');
 const issFilePath = path.join(__dirname, './inno-setup.iss');
@@ -30,13 +31,13 @@ if (!fs.existsSync(outDir)) {
 let isccExePath = path.join('C:\\', 'Program Files (x86)', 'Inno Setup 6', 'ISCC.exe');
 
 console.log('Executing ISCC.exe from -', isccExePath);
-const isccProcess = childProcess.exec(`"${isccExePath}" /Qp ${issFilePath}`)
+const isccProcess: ChildProcess = exec(`"${isccExePath}" /Qp ${issFilePath}`)
 
-isccProcess.stdout.on('data', (data) => {
+isccProcess.stdout?.on('data', (data) => {
   console.log(data);
 });
 
-isccProcess.stderr.on('data', (data) => {
+isccProcess.stderr?.on('data', (data) => {
   console.error(data)
 });
 
@@ -51,5 +52,3 @@ isccProcess.on('close', (exitCode) => {
   }
   console.log('Process exited with code : ' + exitCode)
 });
-
-
