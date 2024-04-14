@@ -1,0 +1,128 @@
+name: release
+
+on:
+  push:
+    branches:
+      - main
+    tags:
+      - '*'
+
+jobs:
+  release-linux:
+    name: release-linux
+    runs-on: ubuntu-22.04
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20.x
+
+      - name: Install pnpm
+        run: npm install -g pnpm@^8
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Pack for linux
+        run: |
+          rm -rf ./.github
+          npm run pack:linux
+
+      - name: Create debian package
+        run: |
+          npm run build:deb
+          npm run build:deb-checksum
+
+      - name: Upload binaries to GitHub release
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: './dist/installers/*.*'
+          tag: ${{ github.ref }}
+          file_glob: true
+
+  release-mac:
+    name: release-mac
+    runs-on: macos-11
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20.x
+
+      - name: Install pnpm
+        run: npm install -g pnpm@^8
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Packing for mac
+        run: |
+          rm -rf ./.github
+          npm run pack:mac
+          npm run pack:mac-arm
+
+      - name: Create zip package
+        run: |
+          npm run build:mac-zip
+          npm run build:mac-arm-zip
+
+      - name: Upload binaries to GitHub release
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: './dist/installers/*.*'
+          tag: ${{ github.ref }}
+          file_glob: true
+
+  release-windows:
+    name: release-windows
+    runs-on: windows-2019
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20.x
+
+      - name: Install pnpm
+        run: npm install -g pnpm@^8
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Pack for Windows
+        run: npm run pack:windows
+
+      - name: Download inno-setup installer
+        working-directory: ./windows
+        run: curl.exe --max-time 30 --retry 3 -L -o ./innosetup.exe https://files.jrsoftware.org/is/6/innosetup-6.2.0.exe
+
+      - name: Install inno-setup silently
+        working-directory: ./windows
+        run: ./innosetup.exe /SP- /VERYSILENT /SUPPRESSMSGBOXES /NORESTART /NOCANCEL
+
+      - name: Create installer
+        run: npm run build:windows
+
+      - name: Upload binaries to GitHub release
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: './dist/installers/*.*'
+          tag: ${{ github.ref }}
+          file_glob: true
