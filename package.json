@@ -1,13 +1,14 @@
 {
   "name": "google-chat-electron",
-  "version": "2.20.0",
+  "version": "3.0.0",
   "description": "Unofficial desktop app for Google Chat.",
   "private": true,
-  "repository": "https://github.com/ankurk91/google-chat-electron",
-  "homepage": "https://github.com/ankurk91/google-chat-electron",
-  "author": "ankurk91",
+  "repository": "https://github.com/zviryatko/google-chat-electron",
+  "homepage": "https://github.com/zviryatko/google-chat-electron",
+  "author": "zviryatko",
   "license": "GNU GPLv3",
   "main": "lib/main/index.js",
+  "type": "module",
   "scripts": {
     "prestart": "npm run ts",
     "start": "electron .",
@@ -29,22 +30,23 @@
     "build:deb-checksum": "cd ./dist/installers && sha512sum *.deb > google-chat-electron-deb-SHA512.txt"
   },
   "devDependencies": {
-    "@types/auto-launch": "^5.0.2",
-    "@types/throttle-debounce": "^5.0.0",
-    "electron": "^21.3.1",
-    "electron-packager": "^17.1.1",
-    "rimraf": "^3.0.2",
-    "typescript": "^4.9.3"
+    "@types/auto-launch": "^5.0.5",
+    "@types/node": "^20.12.7",
+    "@types/throttle-debounce": "^5.0.2",
+    "electron": "^29.3.0",
+    "electron-packager": "^17.1.2",
+    "rimraf": "^5.0.5",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.5"
   },
   "dependencies": {
-    "auto-launch": "^5.0.5",
-    "electron-context-menu": "^3.6.0",
-    "electron-log": "^4.4.8",
-    "electron-store": "^8.1.0",
+    "auto-launch": "^5.0.6",
+    "electron-context-menu": "^3.6.1",
+    "electron-log": "^5.1.2",
+    "electron-store": "^8.2.0",
     "electron-unhandled": "^4.0.1",
     "electron-update-notifier": "^1.7.0",
-    "electron-util": "^0.17.2",
-    "is-online": "^9.0",
+    "is-online": "^10.0.0",
     "throttle-debounce": "^5.0.0"
   },
   "optionalDependencies": {

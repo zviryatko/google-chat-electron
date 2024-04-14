@@ -2,10 +2,7 @@
   "compilerOptions": {
     "allowSyntheticDefaultImports": true,
     "declaration": false,
-    "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
-    "module": "commonjs",
-    "moduleResolution": "node",
     "newLine": "lf",
     "noEmitOnError": true,
     "outDir": "./lib",
@@ -13,10 +10,16 @@
     "skipLibCheck": true,
     "sourceMap": false,
     "strict": true,
-    "target": "esnext",
     "typeRoots": [
       "node_modules/@types"
-    ]
+    ],
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "target": "ESNext",
+    "esModuleInterop": true
+  },
+  "ts-node": {
+    "esm": true
   },
   "include": [
     "./src/**/*"

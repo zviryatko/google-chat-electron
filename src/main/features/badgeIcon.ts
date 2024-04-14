@@ -1,6 +1,5 @@
 import {ipcMain, app, nativeImage, BrowserWindow, Tray} from 'electron';
 import path from 'path';
-import {is} from "electron-util";
 
 type IconTypes = 'offline' | 'normal' | 'badge';
 
@@ -23,7 +22,7 @@ export default (window: BrowserWindow, trayIcon: Tray) => {
   ipcMain.on('faviconChanged', (evt, href) => {
     const type = decideIcon(String(href));
 
-    const size = is.macos ? 16 : 32;
+    const size = 32;
     const icon = nativeImage.createFromPath(path.join(app.getAppPath(), `resources/icons/${type}/${size}.png`))
     trayIcon.setImage(icon);
   });

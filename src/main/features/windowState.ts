@@ -1,6 +1,6 @@
 import {throttle} from 'throttle-debounce';
 import {BrowserWindow} from 'electron';
-import store from '../config';
+import store from '../config.js';
 
 export default (window: BrowserWindow) => {
 

@@ -1,5 +1,5 @@
 import {ipcRenderer} from 'electron';
-import urls from "../urls";
+import urls from "../urls.js";
 
 // Listen to global event from offline.html
 window.addEventListener('app:checkIfOnline', () => {

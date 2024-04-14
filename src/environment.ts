@@ -1,5 +1,5 @@
 import {app} from "electron";
-import urls from './urls';
+import urls from './urls.js';
 
 // Note: don't try to load this file in renderer process
 
