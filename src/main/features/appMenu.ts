@@ -1,5 +1,4 @@
 import {Menu, app, shell, clipboard, BrowserWindow, dialog} from 'electron';
-import {checkForUpdates} from 'electron-update-notifier';
 import path from 'path';
 import log from 'electron-log';
 import {autoLaunch} from './openAtLogin.js';
@@ -144,15 +143,6 @@ export default (window: BrowserWindow) => {
       label: 'Preferences',
       submenu: [
         {
-          label: 'Auto check for Updates',
-          type: 'checkbox',
-          enabled: true,
-          checked: store.get('app.autoCheckForUpdates'),
-          click: (menuItem) => {
-            store.set('app.autoCheckForUpdates', menuItem.checked)
-          }
-        },
-        {
           label: 'Auto Launch at Login',
           type: 'checkbox',
           checked: store.get('app.autoLaunchAtLogin'),
@@ -200,15 +190,6 @@ export default (window: BrowserWindow) => {
     {
       label: 'Help',
       submenu: [
-        {
-          label: 'Check For Updates',
-          enabled: true,
-          click: () => {
-            checkForUpdates({
-              silent: false,
-            });
-          }
-        },
         {
           label: 'Troubleshooting',
           submenu: [

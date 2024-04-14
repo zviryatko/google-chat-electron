@@ -6,7 +6,6 @@ import {enforceSingleInstance, restoreFirstInstance} from './features/singleInst
 import environment from "../environment.js";
 import enableContextMenu from './features/contextMenu.js';
 import runAtLogin from './features/openAtLogin.js';
-import updateNotifier from './features/appUpdates.js';
 import setupTrayIcon from './features/trayIcon.js';
 import keepWindowState from './features/windowState.js';
 import externalLinks from './features/externalLinks.js';
@@ -38,7 +37,6 @@ if (enforceSingleInstance()) {
       restoreFirstInstance(mainWindow);
       keepWindowState(mainWindow);
       runAtLogin(mainWindow);
-      updateNotifier();
       enableContextMenu();
       badgeIcons(mainWindow, trayIcon);
       closeToTray(mainWindow);
