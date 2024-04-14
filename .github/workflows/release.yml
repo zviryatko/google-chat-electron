@@ -45,6 +45,7 @@ jobs:
           file: './dist/installers/*.*'
           tag: ${{ github.ref }}
           file_glob: true
+          overwrite: true
 
   release-mac:
     name: release-mac
@@ -84,6 +85,7 @@ jobs:
           file: './dist/installers/*.*'
           tag: ${{ github.ref }}
           file_glob: true
+          overwrite: true
 
   release-windows:
     name: release-windows
@@ -126,3 +128,4 @@ jobs:
           file: './dist/installers/*.*'
           tag: ${{ github.ref }}
           file_glob: true
+          overwrite: true
