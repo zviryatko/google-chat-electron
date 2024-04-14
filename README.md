@@ -2,9 +2,7 @@
 
 [![latest-tag](https://badgen.net/github/release/zviryatko/google-chat-electron)](https://github.com/zviryatko/google-chat-electron/releases)
 [![downloads](https://img.shields.io/github/downloads/zviryatko/google-chat-electron/total?cacheSeconds=3600)](https://somsubhra.github.io/github-release-stats/?username=zviryatko&repository=google-chat-electron&page=1&per_page=30)
-[![release-linux](https://github.com/zviryatko/google-chat-electron/actions/workflows/release-linux.yml/badge.svg)](https://github.com/zviryatko/google-chat-electron/actions/workflows/release-linux.yml)
-[![release-mac](https://github.com/zviryatko/google-chat-electron/actions/workflows/release-mac.yml/badge.svg)](https://github.com/zviryatko/google-chat-electron/actions/workflows/release-mac.yml)
-[![release-windows](https://github.com/zviryatko/google-chat-electron/actions/workflows/release-windows.yml/badge.svg)](https://github.com/zviryatko/google-chat-electron/actions/workflows/release-windows.yml)
+[![release](https://github.com/zviryatko/google-chat-electron/actions/workflows/release.yml/badge.svg)](https://github.com/zviryatko/google-chat-electron/actions/workflows/release.yml)
 
 An unofficial desktop app for [Google Chat](http://chat.google.com) built with [Electron](https://www.electronjs.org)
 
