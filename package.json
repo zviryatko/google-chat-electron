@@ -18,7 +18,7 @@
     "ts": "tsc",
     "prepack:windows": "npm run clean:dist && npm run ts",
     "pack:windows": "electron-packager . --platform=win32 --arch=x64 --asar --overwrite --out=./dist/ --icon=./resources/icons/normal/windows.ico",
-    "build:windows": "node ./windows/installer.js",
+    "build:windows": "node windows/installer.cjs",
     "prepack:mac": "npm run clean:dist && npm run ts",
     "pack:mac": "electron-packager . --platform=darwin --arch=x64 --asar --overwrite --out=./dist/ --icon=./resources/icons/normal/mac.icns",
     "pack:mac-arm": "electron-packager . --platform=darwin --arch=arm64 --asar --overwrite --out=./dist/ --icon=./resources/icons/normal/mac.icns",

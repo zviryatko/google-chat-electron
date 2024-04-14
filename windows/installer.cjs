@@ -1,12 +1,11 @@
 'use strict';
 
-import path from 'path';
-import fs from 'fs';
-import { exec } from 'child_process';
-import * as utils from './utility';
+const path = require('path');
+const fs = require('fs');
+const childProcess = require('child_process')
+const utils = require('./utility.cjs');
 
-import manifest from '../package.json';
-
+const manifest = require(path.join(__dirname, '../package.json'));
 const inPath = path.join(__dirname, '../dist/');
 const outDir = path.join(__dirname, '../dist/installers');
 const issFilePath = path.join(__dirname, './inno-setup.iss');
@@ -31,14 +30,26 @@ if (!fs.existsSync(outDir)) {
 let isccExePath = path.join('C:\\', 'Program Files (x86)', 'Inno Setup 6', 'ISCC.exe');
 
 console.log('Executing ISCC.exe from -', isccExePath);
+const isccProcess = childProcess.exec(`"${isccExePath}" /Qp ${issFilePath}`)
 
-exec(`"${isccExePath}" /Qp ${issFilePath}`, (error, stdout, stderr) => {
-  if (error) {
-    console.error(error);
-    process.exit(1);
-  }
-
-  console.log(stdout);
-  console.error(stderr);
-  console.log('Installer created successfully.');
+isccProcess.stdout.on('data', (data) => {
+  console.log(data);
 });
+
+isccProcess.stderr.on('data', (data) => {
+  console.error(data)
+});
+
+isccProcess.on('error', (error) => {
+  console.error(error);
+  process.exit(1)
+});
+
+isccProcess.on('close', (exitCode) => {
+  if (exitCode === 0) {
+    console.log('Installer created successfully.')
+  }
+  console.log('Process exited with code : ' + exitCode)
+});
+
+
