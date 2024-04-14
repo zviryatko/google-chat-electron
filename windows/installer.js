@@ -2,7 +2,7 @@
 
 import path from 'path';
 import fs from 'fs';
-import { exec, ChildProcess } from 'child_process';
+import { exec } from 'child_process';
 import * as utils from './utility';
 
 import manifest from '../package.json';
@@ -31,33 +31,14 @@ if (!fs.existsSync(outDir)) {
 let isccExePath = path.join('C:\\', 'Program Files (x86)', 'Inno Setup 6', 'ISCC.exe');
 
 console.log('Executing ISCC.exe from -', isccExePath);
-let isccProcess: ChildProcess | null = null;
 
-try {
-  isccProcess = exec(`"${isccExePath}" /Qp ${issFilePath}`);
-} catch (error) {
-  console.error(error);
-  process.exit(1);
-}
-
-if (isccProcess) {
-  isccProcess.stdout?.on('data', (data) => {
-    console.log(data);
-  });
-
-  isccProcess.stderr?.on('data', (data) => {
-    console.error(data)
-  });
-
-  isccProcess.on('error', (error) => {
+exec(`"${isccExePath}" /Qp ${issFilePath}`, (error, stdout, stderr) => {
+  if (error) {
     console.error(error);
-    process.exit(1)
-  });
+    process.exit(1);
+  }
 
-  isccProcess.on('close', (exitCode) => {
-    if (exitCode === 0) {
-      console.log('Installer created successfully.')
-    }
-    console.log('Process exited with code : ' + exitCode)
-  });
-}
+  console.log(stdout);
+  console.error(stderr);
+  console.log('Installer created successfully.');
+});
