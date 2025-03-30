@@ -31,5 +31,10 @@ export default (url: string): BrowserWindow => {
 
   window.loadURL(url);
 
+  let ua = window.webContents.userAgent;
+  ua = ua.replace(/google-chat-electron\/[0-9\.-]*/,'');
+  ua = ua.replace(/Electron\/*/,'');
+  window.webContents.userAgent = ua;
+
   return window;
 };
