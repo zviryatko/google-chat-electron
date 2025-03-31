@@ -10,7 +10,7 @@ export default (url: string): BrowserWindow => {
       nodeIntegration: false,
       sandbox: false,
       disableBlinkFeatures: 'Auxclick', // Security
-      preload: path.join(app.getAppPath(), 'lib/preload/index.js'),
+      preload: path.join(app.getAppPath(), 'lib/preload/index.cjs'),
     },
     icon: nativeImage.createFromPath(path.join(app.getAppPath(), 'resources/icons/normal/256.png')),
     show: false,
@@ -35,6 +35,10 @@ export default (url: string): BrowserWindow => {
   ua = ua.replace(/google-chat-electron\/[0-9\.-]*/,'');
   ua = ua.replace(/Electron\/*/,'');
   window.webContents.userAgent = ua;
+
+  window.webContents.on('dom-ready', () => {
+
+  })
 
   return window;
 };

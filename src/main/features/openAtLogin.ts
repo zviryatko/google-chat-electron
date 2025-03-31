@@ -1,7 +1,7 @@
 import AutoLaunch from 'auto-launch';
 import {app, BrowserWindow} from 'electron';
 import store from '../config.js';
-import environment from "../../environment.js";
+import environment from "../environment.js";
 
 let autoLaunchInstance: AutoLaunch;
 

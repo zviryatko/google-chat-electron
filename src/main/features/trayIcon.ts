@@ -15,6 +15,11 @@ export default (window: BrowserWindow) => {
     }
   }
 
+  const handleIconDoubleClick = () => {
+    window.show();
+    window.focus();
+  }
+
   trayIcon.setContextMenu(Menu.buildFromTemplate([
     {
       label: 'Toggle',
@@ -35,6 +40,7 @@ export default (window: BrowserWindow) => {
 
   trayIcon.setToolTip('Google Chat');
   trayIcon.on('click', handleIconClick);
+  trayIcon.on('double-click', handleIconDoubleClick);
 
   return trayIcon;
 }

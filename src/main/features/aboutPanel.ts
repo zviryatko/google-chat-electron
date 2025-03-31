@@ -7,7 +7,7 @@ import os from 'os';
 export default (window: BrowserWindow) => {
   const detail = getDetails();
 
-  detail.unshift(`Developed by - zviryatko\n`)
+  detail.unshift(`Developed by - zviryatko (original project by ankurk91)\n`)
   detail.push(`\nLicensed under - GNU GPLv3`)
 
   return dialog.showMessageBox(window, {

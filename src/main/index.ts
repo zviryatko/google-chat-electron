@@ -3,7 +3,7 @@ import {app, BrowserWindow} from 'electron';
 import reportExceptions from './features/reportExceptions.js';
 import windowWrapper from './windowWrapper.js';
 import {enforceSingleInstance, restoreFirstInstance} from './features/singleInstance.js';
-import environment from "../environment.js";
+import environment from "./environment.js";
 import enableContextMenu from './features/contextMenu.js';
 import runAtLogin from './features/openAtLogin.js';
 import setupTrayIcon from './features/trayIcon.js';

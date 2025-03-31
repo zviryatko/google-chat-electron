@@ -23,5 +23,9 @@
   },
   "include": [
     "./src/**/*"
+  ],
+  "exclude": [
+    "./src/preload/**/*.ts",
+    "lib",
   ]
 }

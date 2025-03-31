@@ -5,7 +5,7 @@ import {autoLaunch} from './openAtLogin.js';
 import aboutPanel from './aboutPanel.js';
 import store from './../config.js';
 import {toggleExternalLinksGuard} from "./externalLinks.js";
-import environment from "../../environment.js";
+import environment from "../environment.js";
 
 export default (window: BrowserWindow) => {
 
