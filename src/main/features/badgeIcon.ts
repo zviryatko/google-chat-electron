@@ -5,12 +5,11 @@ type IconTypes = 'offline' | 'normal' | 'badge';
 
 // Decide app icon based on favicon URL
 const decideIcon = (href: string): IconTypes => {
-  let type: IconTypes = 'offline';
+  let type: IconTypes = 'normal';
 
-  if (href.match(/favicon_chat_r2/) ||
-    href.match(/favicon_chat_new_non_notif_r2/)) {
-    type = 'normal';
-  } else if (href.match(/favicon_chat_new_notif_r2/)) {
+  if (href.match(/offline/)) {
+    type = 'offline';
+  } else if (href.match(/new_notif/)) {
     type = 'badge';
   }
 
