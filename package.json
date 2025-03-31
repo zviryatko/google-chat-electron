@@ -15,7 +15,7 @@
     "clean:dist": "rimraf ./dist",
     "clean:lib": "rimraf ./lib",
     "prets": "npm run clean:lib",
-    "ts": "tsc",
+    "ts": "tsc && node esbuild.config.js",
     "prepack:windows": "npm run clean:dist && npm run ts",
     "pack:windows": "electron-packager . --platform=win32 --arch=x64 --asar --overwrite --out=./dist/ --icon=./resources/icons/normal/windows.ico",
     "build:windows": "node windows/installer.cjs",
@@ -33,10 +33,11 @@
     "@types/auto-launch": "^5.0.5",
     "@types/node": "^20.12.7",
     "@types/throttle-debounce": "^5.0.2",
-    "electron": "^29.3.0",
-    "rimraf": "^5.0.5",
+    "electron": "^29.4.6",
+    "esbuild": "^0.25.2",
+    "rimraf": "^5.0.10",
     "ts-node": "^10.9.2",
-    "typescript": "^5.4.5"
+    "typescript": "^5.8.2"
   },
   "dependencies": {
     "@electron/packager": "^18.3.2",
