@@ -1,0 +1,23 @@
+name: Snapcraft Build
+
+on:
+  push:
+    branches:
+      - main
+    tags:
+      - '*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: snapcore/action-build@v1
+        id: build-snap
+
+      - uses: snapcore/action-publish@v1
+        env:
+          SNAPCRAFT_STORE_CREDENTIALS: ${{ secrets.SNAPCRAFT_LOGIN_FILE }}
+        with:
+          snap: ${{ steps.build-snap.outputs.snap }}
+          release: ${{ startsWith(github.ref, 'refs/tags/') && 'candidate' || 'edge'}}
