@@ -1,5 +1,5 @@
 name: google-chat-desktop
-version: 3.1.0
+version: 3.2.0
 summary: Google Chat Desktop
 description: |
   An unofficial desktop app for Google Chat.
@@ -52,7 +52,7 @@ parts:
     after: [ libappindicator ]
     plugin: nil
     source: https://github.com/zviryatko/google-chat-electron.git
-    source-tag: 3.1.0
+    source-tag: 3.2.0
     override-build: |
       # workaround for build.snapcraft.io builds
       # https://bugs.launchpad.net/bugs/1886861
