@@ -40,7 +40,6 @@ export default (url: string): BrowserWindow => {
   window.webContents.userAgent = ua;
 
   window.webContents.on('dom-ready', () => {
-    window.webContents.openDevTools();
   })
 
   return window;
