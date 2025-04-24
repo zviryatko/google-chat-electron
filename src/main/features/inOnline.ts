@@ -1,29 +1,18 @@
-import isOnline from 'is-online';
-import {BrowserWindow, ipcMain, Notification, app, nativeImage, IpcMainEvent} from 'electron';
+import {BrowserWindow, Notification, app, nativeImage, ipcMain} from 'electron';
 import path from 'path';
 
 export default (window: BrowserWindow) => {
-  ipcMain.on('checkIfOnline', async (event: IpcMainEvent) => {
-    const online = await checkIfOnline(5000)
-
-    event.reply('onlineStatus', online);
+  ipcMain.on('onlineStatus', (event, isOnline: boolean, skipNotification: boolean) => {
+    if (!isOnline) {
+      window.loadURL(`file://${path.join(app.getAppPath(), 'src/offline/index.html')}`);
+      if (!skipNotification) {
+        showOfflineNotification(window);
+      }
+    }
   });
-}
-
-const checkIfOnline = async (timeout = 3000) => {
-  return await isOnline({
-    timeout
+  window.on('show', () => {
+    ipcMain.emit('app:checkIfOnline');
   });
-}
-
-const checkForInternet = async (window: BrowserWindow) => {
-  const canChat = await checkIfOnline();
-
-  if (!canChat) {
-    const offlinePagePath = path.join(app.getAppPath(), 'src/offline/index.html');
-    await window.loadURL(`file://${offlinePagePath}`);
-    showOfflineNotification(window);
-  }
 }
 
 const showOfflineNotification = (window: BrowserWindow) => {
@@ -42,5 +31,3 @@ const showOfflineNotification = (window: BrowserWindow) => {
 
   notification.show();
 }
-
-export {checkForInternet}

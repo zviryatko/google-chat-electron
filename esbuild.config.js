@@ -7,6 +7,6 @@ build({
   platform: 'node',
   format: 'cjs',
   sourcemap: true,
-  target: ['node20'],
+  target: ['node23'],
   external: ['electron'],
 }).catch(() => process.exit(1));

@@ -29,4 +29,11 @@ export default (window: BrowserWindow, trayIcon: Tray) => {
   ipcMain.on('unreadCount', (event, count: number) => {
     app.setBadgeCount(Number(count))
   });
+
+  ipcMain.on('onlineStatus', (event, isOnline: boolean) => {
+    const type = isOnline ? 'normal' : 'offline';
+    const size = 32;
+    const icon = nativeImage.createFromPath(path.join(app.getAppPath(), `resources/icons/${type}/${size}.png`))
+    trayIcon.setImage(icon);
+  })
 }

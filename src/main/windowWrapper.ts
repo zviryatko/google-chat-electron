@@ -1,5 +1,5 @@
 import path from 'path';
-import {app, BrowserWindow, nativeImage} from 'electron';
+import {app, BrowserWindow, ipcMain, nativeImage} from 'electron';
 import store from './config.js';
 
 export default (url: string): BrowserWindow => {
@@ -30,6 +30,9 @@ export default (url: string): BrowserWindow => {
   });
 
   window.loadURL(url);
+  window.webContents.once('did-fail-load', (event, errorCode, errorDescription, validatedURL) => {
+    ipcMain.emit('onlineStatus', false, true);
+  });
 
   let ua = window.webContents.userAgent;
   ua = ua.replace(/google-chat-electron\/[0-9\.-]*/,'');
@@ -37,7 +40,7 @@ export default (url: string): BrowserWindow => {
   window.webContents.userAgent = ua;
 
   window.webContents.on('dom-ready', () => {
-
+    window.webContents.openDevTools();
   })
 
   return window;

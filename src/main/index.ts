@@ -13,7 +13,7 @@ import badgeIcons from './features/badgeIcon.js';
 import closeToTray from './features/closeToTray.js';
 import setAppMenu from './features/appMenu.js';
 import overrideUserAgent from './features/userAgent.js';
-import setupOfflineHandlers, {checkForInternet} from './features/inOnline.js';
+import setupOfflineHandlers from './features/inOnline.js';
 import handleNotification from './features/handleNotification.js';
 
 // Keep a global reference of the window object, if you don't, the window will
@@ -30,7 +30,6 @@ if (enforceSingleInstance()) {
       overrideUserAgent();
       mainWindow = windowWrapper(environment.appUrl);
       setupOfflineHandlers(mainWindow);
-      checkForInternet(mainWindow);
 
       trayIcon = setupTrayIcon(mainWindow);
       setAppMenu(mainWindow);
