@@ -38,9 +38,11 @@ export default (window: BrowserWindow) => {
     const isGMailUrl = extractHostname(url) === 'mail.google.com' &&
       !url.startsWith('https://mail.google.com/chat')
 
+    const isGMeetUrl = extractHostname(url) === 'meet.google.com'
+
     const isNotWhitelistedHost = !whiteListedHosts.includes(extractHostname(url));
 
-    if (isGMailUrl || isDownloadUrl || isNotWhitelistedHost) {
+    if (isGMailUrl || isDownloadUrl || isNotWhitelistedHost || isGMeetUrl) {
 
       setImmediate(() => {
         shell.openExternal(url);
