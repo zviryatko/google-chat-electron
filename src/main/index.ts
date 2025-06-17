@@ -1,4 +1,4 @@
-import {app, BrowserWindow} from 'electron';
+import {app, BrowserWindow, nativeTheme} from 'electron';
 
 import reportExceptions from './features/reportExceptions.js';
 import windowWrapper from './windowWrapper.js';
@@ -41,6 +41,7 @@ if (enforceSingleInstance()) {
       closeToTray(mainWindow);
       externalLinks(mainWindow);
       handleNotification(mainWindow);
+      initSystemThemeFollow(mainWindow);
     })
 }
 
@@ -55,3 +56,19 @@ app.on('activate', () => {
     mainWindow.show();
   }
 });
+
+
+function initSystemThemeFollow(mainWindow: BrowserWindow) {
+  nativeTheme.on("updated", () => {
+    mainWindow.webContents.send(
+      "system-theme-changed",
+      nativeTheme.shouldUseDarkColors
+    );
+  });
+  setTimeout(() => {
+    mainWindow.webContents.send(
+      "system-theme-changed",
+      nativeTheme.shouldUseDarkColors
+    );
+  }, 2500);
+}

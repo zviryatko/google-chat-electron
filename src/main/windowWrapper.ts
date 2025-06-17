@@ -1,5 +1,5 @@
 import path from 'path';
-import {app, BrowserWindow, ipcMain, nativeImage} from 'electron';
+import {app, BrowserWindow, ipcMain, nativeImage, nativeTheme} from 'electron';
 import store from './config.js';
 
 export default (url: string): BrowserWindow => {
@@ -18,7 +18,7 @@ export default (url: string): BrowserWindow => {
     minWidth: 480,
     center: true,
     title: 'Google Chat',
-    backgroundColor: '#E8EAED',
+    backgroundColor: nativeTheme.shouldUseDarkColors ? '#28292a' : '#E8EAED',
     autoHideMenuBar: store.get('app.hideMenuBar'),
   });
 
