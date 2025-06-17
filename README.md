@@ -4,6 +4,8 @@
 [![downloads](https://img.shields.io/github/downloads/zviryatko/google-chat-electron/total?cacheSeconds=3600)](https://somsubhra.github.io/github-release-stats/?username=zviryatko&repository=google-chat-electron&page=1&per_page=30)
 [![release](https://github.com/zviryatko/google-chat-electron/actions/workflows/release.yml/badge.svg)](https://github.com/zviryatko/google-chat-electron/actions/workflows/release.yml)
 
+[![google-chat-desktop](https://snapcraft.io/en/dark/install.svg)](https://snapcraft.io/google-chat-desktop)
+
 An unofficial desktop app for [Google Chat](http://chat.google.com) built with [Electron](https://www.electronjs.org)
 
 # Disclaimer
