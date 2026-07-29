@@ -129,7 +129,7 @@ jobs:
 
       - name: Download inno-setup installer
         working-directory: ./windows
-        run: curl.exe --max-time 30 --retry 3 -L -o ./innosetup.exe https://files.jrsoftware.org/is/6/innosetup-6.2.0.exe
+        run: curl.exe -f --max-time 30 --retry 3 -L -o ./innosetup.exe https://github.com/jrsoftware/issrc/releases/download/is-6_7_3/innosetup-6.7.3.exe
 
       - name: Install inno-setup silently
         working-directory: ./windows
