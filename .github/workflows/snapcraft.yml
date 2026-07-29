@@ -18,6 +18,7 @@ jobs:
       - uses: snapcore/action-publish@v1
         env:
           SNAPCRAFT_STORE_CREDENTIALS: ${{ secrets.SNAPCRAFT_LOGIN_FILE }}
+          ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION: true
         with:
           snap: ${{ steps.build-snap.outputs.snap }}
           release: ${{ startsWith(github.ref, 'refs/tags/') && 'candidate' || 'edge'}}
